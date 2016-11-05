@@ -11,8 +11,11 @@ def get_seed_rnum():
 
 def rn_range(a, b):
 	seed = get_seed_rnum()
-	return math.floor(seed * b * 10) + a
-
+	output = math.floor(seed * b * 10) + a
+	if(output > a & output < b): 
+		return math.floor(seed * b * 10) + a
+	return rn_range(a, b)
+		
 if __name__ == "__main__":
 	import sys
 	print(rn_range(int(sys.argv[1]), int(sys.argv[2])))

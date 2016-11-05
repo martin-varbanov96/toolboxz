@@ -1,4 +1,1 @@
-from Mammals import Mammals
-
-myMammal = Mammals()
-myMammal.printMembers()
+from .rnumber import rn_range
