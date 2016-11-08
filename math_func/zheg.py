@@ -49,5 +49,4 @@ def get_zheg(input_arr):
 		print(curr_arg)
 		print(output_arr[curr_arg])
 		output_arr[i+1]=input_arr[curr_arg]
-	print(output_arr)
 get_zheg(input_val)
