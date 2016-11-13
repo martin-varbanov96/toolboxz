@@ -17,7 +17,14 @@ def get_bool_count(val, count=1):
 		count+=1
 		return get_bool_count(val/2, count)
 
-def get_binary_table(val, count):
+def mon_bigger(a, b, current_power):
+	bool_arr = get_binary_table(current_power)
+	for i in range(0, len(bool_arr)):
+		if bool_arr[i][a] < bool_arr[i][b]:
+			return False
+	return True
+
+def get_binary_table(count):
 	arr=[0] * count
 	for i in range(0, len(arr)):
 		arr[i]=[0] * (2**count)
@@ -40,13 +47,26 @@ def get_binary_table(val, count):
 	return arr
 
 def get_zheg(input_arr):
+	#variable which saves the power of the given function 
+	#TODO:: if is not power 2 has to return false
 	current_power = get_bool_count(len(input_arr))
-	bool_table_list= get_binary_table(len(input_arr), current_power)
+	#gets a array containing the binary values from 0 to the power of the input_arr
+	bool_table_list= get_binary_table(current_power)
 	output_arr=[0]* (2 ** current_power)
+	output_arr[0] = input_arr[0]
 
-	for i in range(0, len(bool_table_list)):
-		curr_arg=2 ** int(((current_power-i+1) / 2)) 
-		print(curr_arg)
-		print(output_arr[curr_arg])
-		output_arr[i+1]=input_arr[curr_arg]
-get_zheg(input_val)
+	for i in range(0, len(output_arr)):
+		curr_val = int((2 ** (current_power-i))/2)
+		output_arr[i] = input_arr[i]
+		for j in range(0, i):
+			if(mon_bigger(i, j, current_power)):
+				output_arr[i]=output_arr[i]^output_arr[j]
+	return output_arr
+
+
+#TODO
+def get_zheg_matrix(input_arr):
+	pass
+
+result = get_zheg(input_val)
+print(result)
